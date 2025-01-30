@@ -1,42 +1,41 @@
-//O principal objetivo deste desafio é fortalecer suas habilidades em lógica de programação. Aqui você deverá desenvolver a lógica para resolver o problema.
 let amigos = [];
 
 function adicionarAmigo() {
-    const input = document.getElementById("amigo");
-    const nome = input.value.trim();
-    
+    let input = document.getElementById("amigo");
+    let nome = input.value.trim();
+
     if (nome === "") {
         alert("Por favor, digite um nome antes de adicionar.");
         return;
     }
-    
+
     amigos.push(nome);
     atualizarLista();
     input.value = "";
+    input.focus();
 }
 
 function atualizarLista() {
-    const lista = document.getElementById("listaAmigos");
+    let lista = document.getElementById("listaAmigos");
     lista.innerHTML = "";
-    
-    amigos.forEach((nome, index) => {
-        const item = document.createElement("li");
-        item.textContent = nome;
+
+    amigos.forEach((amigo, index) => {
+        let item = document.createElement("li");
+        item.textContent = amigo;
         lista.appendChild(item);
     });
 }
 
 function sortearAmigo() {
-    const resultado = document.getElementById("resultado");
+    let resultado = document.getElementById("resultado");
     resultado.innerHTML = "";
-    
+
     if (amigos.length === 0) {
-        alert("Adicione pelo menos um nome antes de sortear.");
+        resultado.innerHTML = "<p style='color: red;'>Por favor, adicione pelo menos um nome.</p>";
         return;
     }
-    
-    const sorteado = amigos[Math.floor(Math.random() * amigos.length)];
-    const item = document.createElement("li");
-    item.textContent = `Amigo secreto sorteado: ${sorteado}`;
-    resultado.appendChild(item);
+
+    let indiceSorteado = Math.floor(Math.random() * amigos.length);
+    let amigoSorteado = amigos[indiceSorteado];
+    resultado.innerHTML = `<p>Amigo sorteado: <strong>${amigoSorteado}</strong></p>`;
 }
